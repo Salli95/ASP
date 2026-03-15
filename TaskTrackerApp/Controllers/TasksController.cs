@@ -10,20 +10,20 @@ public class TasksController : ControllerBase
 {
     private readonly ITaskRepository _repository;
 
-    // Вот тут работает Dependency Injection (DI)
+    
     public TasksController(ITaskRepository repository)
     {
         _repository = repository;
     }
 
-    // GET /api/tasks — получить все задачи
+  
     [HttpGet]
     public IActionResult GetAll()
     {
         return Ok(_repository.GetAll());
     }
 
-    // POST /api/tasks/bug — создать баг
+    
     [HttpPost("bug")]
     public IActionResult CreateBug([FromBody] BugReportTask bug)
     {
@@ -31,7 +31,7 @@ public class TasksController : ControllerBase
         return CreatedAtAction(nameof(GetAll), new { id = bug.Id }, bug);
     }
 
-    // PUT /api/tasks/{id}/complete — завершить задачу
+    
     [HttpPut("{id}/complete")]
     public IActionResult Complete(Guid id)
     {
